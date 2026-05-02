@@ -1,1 +1,22 @@
+import python
+import pandas as pd
+import numpy as np
+df= pd.read_CSV("C:\Users\Rouzbeh\Desktop\python")
+mean_Points=df["Story_Points].mean()
+std_dev=df["Story_Points"].std()
+variance=df["Story_Points"].var()
+
+high_risk_threshold = mean_points + std_dev
+outliers = df[df['Story_Points'] > high_risk_threshold]
+low_risk_threshold = mean_points - std_dev
+
+print(f"Gjennomsnittlig oppgavestørrelse: {mean_points:.2f} poeng")
+print(f"Standardavvik (Usikkerhet): {std_dev:.2f}")
+print(f"Varians: {variance:.2f}")
+
+print("\n🚩 HØYRISIKO-OPPGAVER (Outliers):")
+if not outliers.empty:
+    print(outliers[['Task_Name', 'Story_Points']])
+else:
+    print("Ingen ekstreme avvik funnet.")
 
