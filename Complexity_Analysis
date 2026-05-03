@@ -1,0 +1,43 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+df = pd.read_csv(r"C:\Users\Rouzbeh\Desktop\python\sprint_data.csv")
+
+# Complexity as weight
+df['Estimated_Hours'] = df['Story_Points'] * 4 + np.random.randint(-3, 7, size=len(df))
+top_weighted = df.sort_values(by='Story_Points', ascending=False).head(3)
+
+# Complexity as statistical deviation 
+mean_pts = df['Story_Points'].mean()
+std_pts = df['Story_Points'].std()
+limit = mean_pts + std_pts
+statistical_risk = df[df['Story_Points'] > limit]
+
+# Complexity as model uncertainty
+correlation = df['Story_Points'].corr(df['Estimated_Hours'])
+
+print(top_weighted[['Task_Name', 'Story_Points']])
+
+print(f"\n=== NIVÅ 2: STATISTISK RISIKO (Grense: {limit:.2f}) ===")
+if not statistical_risk.empty:
+    print(statistical_risk[['Task_Name', 'Story_Points']])
+else:
+    print("Ingen oppgaver over grensen.")
+
+print(f"\n=== NIVÅ 3: MODELL-PÅLITELIGHET (KORRELASJON) ===")
+print(f"Korrelasjonskoeffisient: {correlation:.4f}")
+
+if correlation > 0.8:
+    print("Konklusjon: Modellen er stabil. Story Points forutsier timer godt.")
+else:
+    print("Konklusjon: Høy modell-usikkerhet. Skjult kompleksitet oppdaget.")
+
+# Bonus: Visualisering av korrelasjon
+plt.scatter(df['Story_Points'], df['Estimated_Hours'], color='blue')
+plt.title(f'Korrelasjonsanalyse (r={correlation:.2f})')
+plt.xlabel('Story Points (Vekt)')
+plt.ylabel('Estimated Hours')
+plt.grid(True)
+plt.show()
+
