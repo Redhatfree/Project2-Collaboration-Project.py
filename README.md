@@ -1,4 +1,4 @@
-# python-collaboration-project.py
+# Python-collaboration-project.py
 Agile Velocity & Sprint Analyser:
 Sprint: It is a short time-box period or mini project which a project team try to finish a specific set of tasks from the project backlog(Remianing tasks).
 This program automate analysis of Agile sprint data. It changes traditional project management from manual spreadsheet to a programmable pandas environment with focus on evaluating team performance, and resource allocation.
