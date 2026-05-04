@@ -10,7 +10,10 @@ This is a sprint project which uses data set saved in a Sprint_Test.csv file. It
 This part of code calculate mean, standard deviationa and variance of the Story_points.It calculate outliers which exceeds the treshhold.
 This formula is : M + Std.dev
 3. Correlation practice:
-This section analyses the correlation between resource usage and complexity. 
+This section analyses the correlation between resource usage and complexity.
+4. Risk dashboard:
+This dashboard define tasks with Critical or Stable condition for risk.
+
 
 
 
