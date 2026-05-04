@@ -1,1 +1,51 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 
+# 1. DATALASTING OG PREPARERING
+# Vi laster inn data og lager 'Estimated_Hours' for å simulere virkelighetens varians
+df = pd.read_csv(r"C:\Users\Rouzbeh\Desktop\python\sprint_data.csv")
+
+# Feature Engineering: 4 timer per poeng + tilfeldig støy (-3 til +6 timer)
+df['Estimated_Hours'] = df['Story_Points'] * 4 + np.random.randint(-3, 7, size=len(df))
+
+# 2. STATISTISKE BEREGNINGER
+mean_pts = df['Story_Points'].mean()
+std_pts = df['Story_Points'].std()
+limit = mean_pts + std_pts  # Definisjon på statistisk risiko (Outliers)
+
+# 3. KATEGORISERING (RISK LEVEL)
+# Vi markerer oppgaver som "CRITICAL" hvis de er over grensen, ellers "STABLE"
+df['Risk_Level'] = ['CRITICAL' if x > limit else 'STABLE' for x in df['Story_Points']]
+
+# 4. MODELL-ANALYSE (KORRELASJON)
+correlation = df['Story_Points'].corr(df['Estimated_Hours'])
+
+# 5. LEDELSESRAPPORT (f-strings med .2f og .4f)
+total_risk_hours = df[df['Risk_Level'] == 'CRITICAL']['Estimated_Hours'].sum()
+num_critical = len(df[df['Risk_Level'] == 'CRITICAL'])
+
+print("-" * 40)
+print("KVANTITATIV RISIKORAPPORT")
+print("-" * 40)
+print(f"Gjennomsnittlig kompleksitet: {mean_pts:.2f} poeng")
+print(f"Risikogrense (1 std.avvik):  {limit:.2f} poeng")
+print(f"Modell-pålitelighet (corr): {correlation:.4f}")
+print("-" * 40)
+print(f"KONKLUSJON: {num_critical} kritiske oppgaver identifisert.")
+print(f"Estimert ressursbehov for risiko-oppgaver: {total_risk_hours:.1f} timer.")
+print("-" * 40)
+
+# 6. VISUALISERING
+# Vi farger kritiske oppgaver røde for visuell effekt
+colors = ['red' if x == 'CRITICAL' else 'skyblue' for x in df['Risk_Level']]
+
+plt.figure(figsize=(10, 6))
+plt.bar(df['Task_Name'], df['Story_Points'], color=colors)
+plt.axhline(y=limit, color='black', linestyle='--', label='Risikogrense')
+plt.title(f'Sprintsammensetning og Risikoprofil (Korrelasjon: {correlation:.2f})')
+plt.ylabel('Story Points (Vekt)')
+plt.xticks(rotation=45)
+plt.legend()
+plt.tight_layout()
+plt.show()
