@@ -11,7 +11,7 @@ This part of code calculate mean, standard deviationa and variance of the Story_
 This formula is : M + Std.dev
 3. Complexity Analysis :
 This section analyses the correlation between resource usage and complexity.
-4. Risk dashboard:
+4. Predicative Risk dashboard:
 This dashboard define tasks with Critical or Stable condition for risk.
 
 
