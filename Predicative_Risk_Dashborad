@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # 1. Data loading and preperation
-# Vi laster inn data og lager 'Estimated_Hours' for simulation of virkelighetens varianse of reality
+# Vi laster inn data og lager 'Estimated_Hours' for simulation of  varianse of reality
 df = pd.read_csv(r"C:\Users\Rouzbeh\Desktop\python\sprint_data.csv")
 
 # Feature Engineering: 4 hour for each point + random noise (-3 til +6 timer)
@@ -32,7 +32,7 @@ print(f"Average complexity: {mean_pts:.2f} point")
 print(f"Risikogrense (1 std.avvik):  {limit:.2f} point")
 print(f"Modell-pålitelighet (corr): {correlation:.4f}")
 print("-" * 40)
-print(f"KONKLUSJON: {num_critical} kritiske oppgaver identifisert.")
+print(f"KONKLUSJON: {num_critical} critical tasks identifisert.")
 print(f"Estimated rosource usage for risk : {total_risk_hours:.1f} hour.")
 print("-" * 40)
 
