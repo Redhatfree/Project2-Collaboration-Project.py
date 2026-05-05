@@ -25,7 +25,17 @@ correlation = df['Story_Points'].corr(df['Estimated_Hours'])
 total_risk_hours = df[df['Risk_Level'] == 'CRITICAL']['Estimated_Hours'].sum()
 num_critical = len(df[df['Risk_Level'] == 'CRITICAL'])
 
+print("Quantitative risk report")
 
+print("-" * 40)
+
+print(f"Average complexity: {mean_pts:.2f} point")
+
+print(f"Risik limit (1 std.avvik):  {limit:.2f} point")
+
+print(f"Modell-reliability (corr): {correlation:.4f}")
+
+print("-" * 40)
 
 print(f"CONCLUSION: {num_critical} critical tasks identified.")
 print(f"Estimated rosource usage for risk : {total_risk_hours:.1f} hour.")
