@@ -30,14 +30,14 @@ print("Quantitative risk report")
 print("-" * 40)
 print(f"Average complexity: {mean_pts:.2f} point")
 print(f"Risik limit (1 std.avvik):  {limit:.2f} point")
-print(f"Modell-pålitelighet (corr): {correlation:.4f}")
+print(f"Modell-reliability (corr): {correlation:.4f}")
 print("-" * 40)
 print(f"CONCLUSION: {num_critical} critical tasks identified.")
 print(f"Estimated rosource usage for risk : {total_risk_hours:.1f} hour.")
 print("-" * 40)
 
 # 6. VISULAISING
-# Vi farger kritiske oppgaver red for visual effect
+# Vi farger critical tasks red for visual effect
 colors = ['red' if x == 'CRITICAL' else 'skyblue' for x in df['Risk_Level']]
 
 plt.figure(figsize=(10, 6))
