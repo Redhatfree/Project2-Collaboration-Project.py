@@ -3,25 +3,25 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # 1. DATALASTING OG PREPARERING
-# Vi laster inn data og lager 'Estimated_Hours' for å simulere virkelighetens varians
+# Vi laster inn data og lager 'Estimated_Hours' for simulation of virkelighetens varians
 df = pd.read_csv(r"C:\Users\Rouzbeh\Desktop\python\sprint_data.csv")
 
-# Feature Engineering: 4 timer per poeng + tilfeldig støy (-3 til +6 timer)
+# Feature Engineering: 4 hour for each point + random noise (-3 til +6 timer)
 df['Estimated_Hours'] = df['Story_Points'] * 4 + np.random.randint(-3, 7, size=len(df))
 
 # 2. STATISTISKE BEREGNINGER
 mean_pts = df['Story_Points'].mean()
 std_pts = df['Story_Points'].std()
-limit = mean_pts + std_pts  # Definisjon på statistisk risiko (Outliers)
+limit = mean_pts + std_pts  # Definition of static risk (Outliers)
 
-# 3. KATEGORISERING (RISK LEVEL)
-# Vi markerer oppgaver som "CRITICAL" hvis de er over grensen, ellers "STABLE"
+# 3. CATEGORISING (RISK LEVEL)
+# Vi highlight tasks which are "CRITICAL" if they are over limit, else "STABLE"
 df['Risk_Level'] = ['CRITICAL' if x > limit else 'STABLE' for x in df['Story_Points']]
 
-# 4. MODELL-ANALYSE (KORRELASJON)
+# 4. MODEL-ANALYSE (CORELATION)
 correlation = df['Story_Points'].corr(df['Estimated_Hours'])
 
-# 5. LEDELSESRAPPORT (f-strings med .2f og .4f)
+# 5. MAANGEMENT REPORT (f-strings med .2f og .4f)
 total_risk_hours = df[df['Risk_Level'] == 'CRITICAL']['Estimated_Hours'].sum()
 num_critical = len(df[df['Risk_Level'] == 'CRITICAL'])
 
@@ -49,3 +49,20 @@ plt.xticks(rotation=45)
 plt.legend()
 plt.tight_layout()
 plt.show()
+print("\n" + "="*40)
+print("     STETGIC RISK EVALUATION")
+print("="*40)
+
+if correlation > 0.85:
+    status = "GREEN"
+    message = f"Modell is complete stable ({correlation:.4f}). Story points are reliable indicators."
+elif correlation > 0.60:
+    status = "YELLOW"
+    message = f"Model has moderate uncertainty ({correlation:.4f}). Following red parts carefully."
+else:
+    status = "RED"
+    message = f"Notice: Low correlation ({correlation:.4f})! Plans should be evaluated."
+
+print(f"STATUS: {status}")
+print(f"RECOMMENDATION: {message}")
+print("="*40)
