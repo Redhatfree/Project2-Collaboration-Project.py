@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # 1. Data loading and preperation
-# Vi laster inn data og lager 'Estimated_Hours' for simulation of virkelighetens varians
+# Vi laster inn data og lager 'Estimated_Hours' for simulation of virkelighetens varianse of reality
 df = pd.read_csv(r"C:\Users\Rouzbeh\Desktop\python\sprint_data.csv")
 
 # Feature Engineering: 4 hour for each point + random noise (-3 til +6 timer)
