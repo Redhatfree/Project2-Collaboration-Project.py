@@ -36,8 +36,8 @@ print(f"CONCLUSION: {num_critical} critical tasks identified.")
 print(f"Estimated rosource usage for risk : {total_risk_hours:.1f} hour.")
 print("-" * 40)
 
-# 6. VISUALISERING
-# Vi farger kritiske oppgaver røde for visuell effekt
+# 6. VISULAISING
+# Vi farger kritiske oppgaver red for visual effect
 colors = ['red' if x == 'CRITICAL' else 'skyblue' for x in df['Risk_Level']]
 
 plt.figure(figsize=(10, 6))
