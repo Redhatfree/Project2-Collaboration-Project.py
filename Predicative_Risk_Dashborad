@@ -42,9 +42,9 @@ colors = ['red' if x == 'CRITICAL' else 'skyblue' for x in df['Risk_Level']]
 
 plt.figure(figsize=(10, 6))
 plt.bar(df['Task_Name'], df['Story_Points'], color=colors)
-plt.axhline(y=limit, color='black', linestyle='--', label='Risikogrense')
-plt.title(f'Sprintsammensetning og Risikoprofil (Korrelasjon: {correlation:.2f})')
-plt.ylabel('Story Points (Vekt)')
+plt.axhline(y=limit, color='black', linestyle='--', label='Risk_Limit')
+plt.title(f'Sprintsammensetning og Risk profile (correlation: {correlation:.2f})')
+plt.ylabel('Story Points (Weight)')
 plt.xticks(rotation=45)
 plt.legend()
 plt.tight_layout()
