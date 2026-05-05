@@ -13,7 +13,7 @@ df['Estimated_Hours'] = df['Story_Points'] * 4 + np.random.randint(-3, 7, size=l
 mean_pts = df['Story_Points'].mean()
 std_pts = df['Story_Points'].std()
 limit = mean_pts + std_pts  # Definition of static risk (Outliers)
-
+#limit = 2.8 + 2.7 = 6.5
 # 3. CATEGORISING (RISK LEVEL)
 # Vi highlight tasks which are "CRITICAL" if they are over limit, else "STABLE"
 df['Risk_Level'] = ['CRITICAL' if x > limit else 'STABLE' for x in df['Story_Points']]
@@ -25,13 +25,8 @@ correlation = df['Story_Points'].corr(df['Estimated_Hours'])
 total_risk_hours = df[df['Risk_Level'] == 'CRITICAL']['Estimated_Hours'].sum()
 num_critical = len(df[df['Risk_Level'] == 'CRITICAL'])
 
-print("-" * 40)
-print("Quantitative risk report")
-print("-" * 40)
-print(f"Average complexity: {mean_pts:.2f} point")
-print(f"Risik limit (1 std.avvik):  {limit:.2f} point")
-print(f"Modell-reliability (corr): {correlation:.4f}")
-print("-" * 40)
+
+
 print(f"CONCLUSION: {num_critical} critical tasks identified.")
 print(f"Estimated rosource usage for risk : {total_risk_hours:.1f} hour.")
 print("-" * 40)
